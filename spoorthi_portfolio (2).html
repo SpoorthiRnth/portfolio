@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spoorthi Ranganath</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F6F2;
+  --surface: #EFECE6;
+  --surface2: #E5E1D8;
+  --ink: #18160F;
+  --ink-60: #5C584F;
+  --ink-40: #9A9690;
+  --green: #2C4A3E;
+  --green-mid: #3D6B5A;
+  --green-pale: #CDE0D8;
+  --green-xpale: #EAF3EF;
+  --amber: #A0622A;
+  --amber-pale: #F5EBE0;
+  --line: #D9D5CC;
+  --r: 5px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;inset:0 0 auto;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 5vw;background:rgba(248,246,242,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.n-logo{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--ink);text-decoration:none;letter-spacing:.01em}
+.n-links{display:flex;gap:1.8rem;list-style:none}
+.n-links a{font-size:.8rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-60);text-decoration:none;transition:color .2s}
+.n-links a:hover{color:var(--green)}
+.n-cta{padding:.5rem 1.2rem;background:var(--green);color:#fff;font-size:.78rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;border-radius:2rem;text-decoration:none;transition:background .2s}
+.n-cta:hover{background:var(--green-mid)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.burger span{width:20px;height:1.5px;background:var(--ink);transition:all .3s}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.mob-menu{display:none;position:fixed;top:57px;inset-inline:0;z-index:199;background:var(--bg);border-bottom:1px solid var(--line);padding:1.5rem 5vw 2rem;flex-direction:column;gap:1rem}
+.mob-menu.open{display:flex}
+.mob-menu a{font-size:.95rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-60);text-decoration:none}
+
+/* ── HERO ── */
+.hero{min-height:100svh;display:flex;align-items:center;padding:7rem 5vw 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%, var(--green-xpale) 0%, transparent 70%);pointer-events:none}
+.hero-inner{max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.h-eyebrow{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);background:var(--green-xpale);border:1px solid var(--green-pale);padding:.3rem .9rem;border-radius:2rem;display:inline-block;margin-bottom:1.4rem;opacity:0;animation:up .5s .1s forwards}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,4.5vw,4rem);line-height:1.08;letter-spacing:-.02em;color:var(--ink);opacity:0;animation:up .55s .25s forwards}
+.hero h1 em{font-style:italic;color:var(--green)}
+.h-sub{margin-top:1.4rem;font-size:1rem;font-weight:300;color:var(--ink-60);line-height:1.75;max-width:460px;opacity:0;animation:up .55s .4s forwards}
+.h-row{margin-top:2rem;display:flex;gap:.75rem;flex-wrap:wrap;opacity:0;animation:up .55s .55s forwards}
+.btn-solid{padding:.75rem 1.6rem;background:var(--green);color:#fff;font-size:.85rem;font-weight:500;border-radius:var(--r);text-decoration:none;transition:background .2s,transform .15s}
+.btn-solid:hover{background:var(--green-mid);transform:translateY(-1px)}
+.btn-ghost{padding:.75rem 1.6rem;border:1.5px solid var(--line);color:var(--ink-60);font-size:.85rem;font-weight:500;border-radius:var(--r);text-decoration:none;transition:all .2s}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
+
+/* Hero right — terminal */
+.hero-terminal{opacity:0;animation:up .7s .45s forwards}
+.terminal{background:var(--ink);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.22)}
+.t-bar{background:#2a2820;padding:.7rem 1rem;display:flex;align-items:center;gap:.5rem}
+.t-dot{width:11px;height:11px;border-radius:50%}
+.t-dot.r{background:#ff5f57}.t-dot.y{background:#febc2e}.t-dot.g{background:#28c840}
+.t-title{font-size:.72rem;color:#666;margin-left:.5rem;letter-spacing:.04em}
+.t-body{padding:1.4rem 1.6rem;font-family:'Courier New',monospace;font-size:.82rem;line-height:1.8}
+.t-line{display:flex;gap:.6rem;align-items:baseline}
+.t-prompt{color:#4A7A68;user-select:none}
+.t-cmd{color:#E8E4DC}
+.t-out{color:#9A9690;padding-left:1.2rem}
+.t-key{color:#7CB8A8}
+.t-val{color:#D4A96A}
+.t-str{color:#98C379}
+.t-cursor{display:inline-block;width:8px;height:1em;background:#4A7A68;animation:blink 1s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── SECTION SHELL ── */
+section{padding:6rem 5vw}
+.s-inner{max-width:1200px;margin:0 auto}
+.s-label{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin-bottom:.5rem}
+.s-title{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,3vw,2.6rem);line-height:1.15;color:var(--ink);margin-bottom:.8rem}
+.s-title em{font-style:italic;color:var(--green)}
+.s-rule{width:36px;height:2px;background:var(--green);margin-bottom:1rem}
+.s-desc{font-size:.95rem;color:var(--ink-60);max-width:500px;line-height:1.7;margin-bottom:2.8rem}
+
+/* ── DIFFERENTIATORS (replaces "Who Am I") ── */
+.diff-bg{background:var(--ink)}
+.diff-bg .s-label{color:#4A7A68}
+.diff-bg .s-title{color:#F8F6F2}
+.diff-bg .s-title em{color:#7CB8A8}
+.diff-bg .s-rule{background:#4A7A68}
+.diff-bg .s-desc{color:rgba(248,246,242,.55)}
+
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:8px;overflow:hidden}
+.diff-card{background:rgba(255,255,255,.03);padding:2.2rem 1.8rem;transition:background .25s;cursor:default}
+.diff-card:hover{background:rgba(74,122,104,.12)}
+.diff-num{font-family:'DM Serif Display',serif;font-size:2.6rem;color:rgba(74,122,104,.35);line-height:1;margin-bottom:1rem}
+.diff-heading{font-size:.95rem;font-weight:500;color:#E8E4DC;margin-bottom:.6rem}
+.diff-text{font-size:.85rem;color:rgba(248,246,242,.5);line-height:1.65}
+.diff-text strong{color:rgba(124,184,168,.85);font-weight:500}
+
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem}
+.proj-card{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:all .25s;position:relative;display:flex;flex-direction:column}
+.proj-card:hover{box-shadow:0 12px 40px rgba(44,74,62,.12);transform:translateY(-4px);border-color:var(--green-pale)}
+.proj-header{padding:1.8rem 1.8rem 0}
+.proj-status{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .75rem;border-radius:2rem;margin-bottom:1rem}
+.proj-status.live{background:var(--green-xpale);color:var(--green-mid)}
+.proj-status.live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green-mid)}
+.proj-status.building{background:var(--amber-pale);color:var(--amber)}
+.proj-status.building::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--amber)}
+.proj-title{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--ink);margin-bottom:.6rem;line-height:1.3}
+.proj-hook{font-size:.88rem;color:var(--ink-60);line-height:1.65;margin-bottom:1.2rem}
+.proj-divider{height:1px;background:var(--line);margin:0 1.8rem}
+.proj-body{padding:1.4rem 1.8rem;flex:1}
+.proj-detail{font-size:.84rem;color:var(--ink-60);line-height:1.65;margin-bottom:1.2rem}
+
+/* Expandable insight */
+.proj-insight-toggle{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--green-mid);cursor:pointer;user-select:none;background:none;border:none;padding:0;margin-bottom:1rem}
+.proj-insight-toggle svg{transition:transform .2s}
+.proj-insight-toggle.open svg{transform:rotate(90deg)}
+.proj-insight{display:none;background:var(--green-xpale);border-left:3px solid var(--green-pale);border-radius:0 4px 4px 0;padding:1rem 1.2rem;margin-bottom:1.2rem;font-size:.83rem;color:var(--ink-60);line-height:1.65}
+.proj-insight.open{display:block;animation:up .25s forwards}
+
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 1.8rem 1.8rem}
+.p-tag{font-size:.7rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.22rem .7rem;border-radius:2rem;background:var(--surface);color:var(--ink-60);border:1px solid var(--line)}
+
+/* Pipeline diagram inside card */
+.pipeline{display:flex;align-items:center;gap:0;margin-bottom:1rem;flex-wrap:wrap}
+.pipe-step{font-size:.68rem;font-weight:500;letter-spacing:.04em;padding:.3rem .7rem;background:var(--surface);border:1px solid var(--line);border-radius:3px;color:var(--ink-60);white-space:nowrap}
+.pipe-arrow{font-size:.7rem;color:var(--ink-40);padding:0 .2rem}
+
+/* Supply chain result table */
+.result-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-bottom:1rem}
+.result-table th{text-align:left;padding:.4rem .6rem;font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-40);border-bottom:1px solid var(--line)}
+.result-table td{padding:.45rem .6rem;color:var(--ink-60);border-bottom:1px solid rgba(0,0,0,.04)}
+.result-table tr:last-child td{border-bottom:none}
+.badge-red{font-size:.66rem;font-weight:600;padding:.15rem .5rem;border-radius:2rem;background:#FEE2E2;color:#B91C1C}
+.badge-amber{font-size:.66rem;font-weight:600;padding:.15rem .5rem;border-radius:2rem;background:#FEF3C7;color:#92400E}
+.badge-green{font-size:.66rem;font-weight:600;padding:.15rem .5rem;border-radius:2rem;background:var(--green-xpale);color:var(--green)}
+
+/* ── SKILLS ── */
+.skills-bg{background:var(--surface)}
+.skills-layout{display:grid;grid-template-columns:220px 1fr;gap:3rem;align-items:start}
+.s-tabs{display:flex;flex-direction:column;gap:.2rem}
+.s-tab{padding:.75rem 1rem;font-size:.85rem;font-weight:500;color:var(--ink-60);cursor:pointer;background:none;border:none;border-left:2px solid transparent;text-align:left;border-radius:0 var(--r) var(--r) 0;transition:all .2s}
+.s-tab:hover:not(.active){background:var(--surface2);color:var(--ink)}
+.s-tab.active{color:var(--green);border-left-color:var(--green);background:var(--green-xpale)}
+.s-panel{display:none}
+.s-panel.active{display:block;animation:up .25s forwards}
+.s-panel-title{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);margin-bottom:.35rem}
+.s-panel-desc{font-size:.88rem;color:var(--ink-60);line-height:1.65;margin-bottom:1.2rem;max-width:500px}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{padding:.4rem 1rem;background:#fff;border:1px solid var(--line);border-radius:2rem;font-size:.8rem;color:var(--ink-60);transition:all .2s;cursor:default}
+.chip:hover{background:var(--green-xpale);border-color:var(--green-pale);color:var(--green)}
+.chip.hi{background:var(--green-xpale);border-color:var(--green-pale);color:var(--green);font-weight:500}
+
+/* ── EXPERIENCE ── */
+.exp-layout{display:grid;grid-template-columns:200px 1fr;gap:3rem}
+.exp-nav{display:flex;flex-direction:column;gap:.2rem;position:sticky;top:5rem}
+.exp-nav-item{padding:.65rem 1rem;font-size:.82rem;font-weight:500;color:var(--ink-60);cursor:pointer;background:none;border:none;border-left:2px solid transparent;text-align:left;border-radius:0 var(--r) var(--r) 0;transition:all .2s}
+.exp-nav-item:hover:not(.active){background:var(--surface);color:var(--ink)}
+.exp-nav-item.active{color:var(--green);border-left-color:var(--green)}
+.exp-panel{display:none}
+.exp-panel.active{display:block;animation:up .25s forwards}
+.exp-role{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);margin-bottom:.15rem}
+.exp-company{font-size:.9rem;font-weight:500;color:var(--green-mid);margin-bottom:.25rem}
+.exp-period{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-40);margin-bottom:1.2rem}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.exp-list li{font-size:.9rem;color:var(--ink-60);line-height:1.6;padding-left:1.2rem;position:relative}
+.exp-list li::before{content:'→';position:absolute;left:0;color:var(--green-mid);font-size:.8rem}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-left h2{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,2.8vw,2.4rem);color:var(--ink);margin-bottom:1rem;line-height:1.2}
+.contact-left h2 em{font-style:italic;color:var(--green)}
+.contact-left p{font-size:.95rem;color:var(--ink-60);line-height:1.75;margin-bottom:1.5rem}
+.contact-links{display:flex;flex-direction:column;gap:.8rem}
+.c-link{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.4rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;color:var(--ink);transition:all .2s}
+.c-link:hover{border-color:var(--green-pale);background:var(--green-xpale);transform:translateX(3px)}
+.c-icon{width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.c-lbl{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-40);margin-bottom:.1rem}
+.c-val{font-size:.88rem;font-weight:500;color:var(--ink)}
+
+/* ── FOOTER ── */
+footer{padding:2rem 5vw;background:var(--ink);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem}
+.f-name{font-family:'DM Serif Display',serif;font-size:1rem;color:rgba(248,246,242,.6)}
+.f-note{font-size:.75rem;letter-spacing:.04em;color:rgba(248,246,242,.3)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s,transform .55s}
+.reveal.on{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;gap:3rem;text-align:center}
+  .h-sub{margin:1.2rem auto 0}
+  .h-row{justify-content:center}
+  .hero-terminal{max-width:500px;margin:0 auto}
+  .diff-grid{grid-template-columns:1fr}
+  .skills-layout{grid-template-columns:1fr}
+  .s-tabs{flex-direction:row;flex-wrap:wrap}
+  .s-tab{border-left:none;border-bottom:2px solid transparent;border-radius:var(--r) var(--r) 0 0}
+  .s-tab.active{border-left:none;border-bottom-color:var(--green)}
+  .exp-layout{grid-template-columns:1fr}
+  .exp-nav{position:static;flex-direction:row;flex-wrap:wrap;gap:.4rem}
+  .exp-nav-item{border-left:none;border-bottom:2px solid transparent;border-radius:var(--r) var(--r) 0 0;padding:.5rem .9rem;font-size:.78rem}
+  .exp-nav-item.active{border-left:none;border-bottom-color:var(--green)}
+  .contact-wrap{grid-template-columns:1fr;gap:2.5rem}
+  .n-links,.n-cta{display:none}
+  .burger{display:flex}
+}
+@media(max-width:600px){
+  section{padding:4rem 5vw}
+  .diff-grid{border-radius:6px}
+  .proj-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" class="n-logo">Spoorthi Ranganath</a>
+  <ul class="n-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://github.com/SpoorthiRnth" target="_blank">GitHub</a></li>
+  </ul>
+  <a href="mailto:spoorthi.ranganatha@gmail.com" class="n-cta">Hire me</a>
+  <div class="burger" id="burger" onclick="toggleBurger()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="closeBurger()">About</a>
+  <a href="#projects" onclick="closeBurger()">Projects</a>
+  <a href="#skills" onclick="closeBurger()">Skills</a>
+  <a href="#experience" onclick="closeBurger()">Experience</a>
+  <a href="#contact" onclick="closeBurger()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <div class="h-eyebrow">AI Engineer · Dresden, Germany</div>
+      <h1>I build AI that<br><em>ships to production</em></h1>
+      <p class="h-sub">Not demos. Not notebooks. End-to-end systems — from multi-agent pipelines and RAG architectures to containerised ML deployments monitored in production with ELK Stack.</p>
+      <div class="h-row">
+        <a href="#projects" class="btn-solid">See my work</a>
+        <a href="mailto:spoorthi.ranganatha@gmail.com" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-terminal">
+      <div class="terminal">
+        <div class="t-bar">
+          <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+          <span class="t-title">spoorthi ~ profile</span>
+        </div>
+        <div class="t-body">
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> cat profile.json</span></div>
+          <div class="t-line"><span class="t-out">{</span></div>
+          <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"Data Scientist / AI Engineer"</span>,</span></div>
+          <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"years_xp"</span>: <span class="t-val">4</span>,</span></div>
+          <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"focus"</span>: [<span class="t-str">"Agentic AI"</span>, <span class="t-str">"RAG"</span>, <span class="t-str">"MLOps"</span>],</span></div>
+          <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"llm_deployments"</span>: [<span class="t-str">"cloud"</span>, <span class="t-str">"offline / air-gapped"</span>],</span></div>
+          <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"infra"</span>: [<span class="t-str">"Docker"</span>, <span class="t-str">"K8s"</span>, <span class="t-str">"GitLab CI"</span>],</span></div>
+          <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-str">"Dresden, DE"</span>,</span></div>
+          <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"open_to"</span>: <span class="t-str">"hybrid / remote"</span></span></div>
+          <div class="t-line"><span class="t-out">}</span></div>
+          <div class="t-line" style="margin-top:.4rem"><span class="t-prompt">$</span><span class="t-cmd"> </span><span class="t-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT MAKES ME DIFFERENT -->
+<section class="diff-bg" id="about">
+  <div class="s-inner">
+    <div class="s-label reveal">What makes me different</div>
+    <h2 class="s-title reveal" style="color:#F8F6F2">Three things most <em>AI engineers skip</em></h2>
+    <div class="s-rule reveal"></div>
+    <div class="diff-grid reveal">
+      <div class="diff-card">
+        <div class="diff-num">01</div>
+        <div class="diff-heading">I think about what happens after deployment</div>
+        <div class="diff-text">Most portfolios show a working prototype. Mine include <strong>CI/CD pipelines, Docker deployments, and ELK Stack monitoring</strong>. I've maintained production models through data drift and live incidents, not just shipped them.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">02</div>
+        <div class="diff-heading">I've built for data-sensitive environments</div>
+        <div class="diff-text">My M.Sc. thesis ran entirely <strong>offline, no cloud APIs, no data leaving the building</strong>. I've designed systems around privacy constraints, not around them. That's rare at my level.</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">03</div>
+        <div class="diff-heading">I connect AI to real business problems</div>
+        <div class="diff-text">From enterprise analytics to AI workflows, I've worked where <strong>the output has financial consequences</strong>. I know how to translate operational requirements into systems that actually get used.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="s-inner">
+    <div class="s-label reveal">Built, not imagined</div>
+    <h2 class="s-title reveal">Projects that <em>do something</em></h2>
+    <div class="s-rule reveal"></div>
+    <p class="s-desc reveal">Each project solves a real problem. Click the "Design decision" toggle on each card to see why I built it the way I did.</p>
+
+    <div class="proj-grid">
+
+      <!-- PROJECT 1: Doclyst -->
+      <div class="proj-card reveal" onclick="window.open('https://github.com/SpoorthiRnth/Multi-Agent-RAG-Langgraph','_blank')" style="cursor:pointer">
+        <div class="proj-header">
+          <div class="proj-status live">Live on GitHub</div>
+          <div class="proj-title">Doclyst - Multi-Agent RAG for Manufacturing Docs</div>
+          <div class="proj-hook">Query maintenance reports, sensor logs, and operational PDFs in plain English. A supervisor routes each question to the right specialist agent or runs them in parallel for complex queries.</div>
+        </div>
+        <div class="proj-divider"></div>
+        <div class="proj-body">
+          <div class="pipeline">
+            <span class="pipe-step">PDF / DOCX / CSV</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">FAISS index</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Supervisor</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Specialist agents</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Synthesis</span>
+          </div>
+          <button class="proj-insight-toggle" onclick="toggleInsight(this,event)">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1.5L7 5L3 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Key design decision
+          </button>
+          <div class="proj-insight">
+            The LLM backend is swappable between Claude API and a local Ollama model via a single env variable. This came directly from thesis work, some clients can't send data to the cloud. The architecture shouldn't care.
+          </div>
+          <div class="proj-detail">4 specialist agents: retrieval, table analysis, metadata, and synthesis. Agent trace visible in the Streamlit sidebar. CI/CD via GitHub Actions: lint → test → Docker build on every push.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="p-tag">LangGraph</span>
+          <span class="p-tag">FAISS</span>
+          <span class="p-tag">Streamlit</span>
+          <span class="p-tag">Ollama</span>
+          <span class="p-tag">Docker</span>
+          <span class="p-tag">GitHub Actions</span>
+        </div>
+      </div>
+
+      <!-- PROJECT 2: Supply Chain -->
+      <div class="proj-card reveal reveal-d1" onclick="window.open('https://github.com/SpoorthiRnth/AI-Accelerated-Supply-Chain','_blank')" style="cursor:pointer">
+        <div class="proj-header">
+          <div class="proj-status live">Live on GitHub</div>
+          <div class="proj-title">AI-Accelerated Supply Chain — 12-Agent Pipeline</div>
+          <div class="proj-hook">Twelve agents govern every stage of supply chain data flow across a 4-zone Medallion architecture. Found $204,950 in financial exposure and $7,200 in invoice overbilling in a single pipeline run.</div>
+        </div>
+        <div class="proj-divider"></div>
+        <div class="proj-body">
+          <table class="result-table">
+            <thead><tr><th>Zone</th><th>What was found</th><th>Impact</th></tr></thead>
+            <tbody>
+              <tr><td>Pre-Ingestion</td><td>Risk-tagged shipments</td><td><span class="badge-red">$312k exposure</span></td></tr>
+              <tr><td>Processing</td><td>TMS/ERP conflicts resolved</td><td><span class="badge-amber">2 shipments</span></td></tr>
+              <tr><td>Intelligence</td><td>Invoice overbilling caught</td><td><span class="badge-red">$7,200</span></td></tr>
+              <tr><td>Reporting</td><td>Proactive alerts pushed</td><td><span class="badge-green">4 alerts</span></td></tr>
+            </tbody>
+          </table>
+          <button class="proj-insight-toggle" onclick="toggleInsight(this,event)">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1.5L7 5L3 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Key design decision
+          </button>
+          <div class="proj-insight">
+            Every agent runs deterministic rule-based logic first scoring, thresholds, conflict detection then calls GPT-5 to add reasoning and narrative on top of structured facts. <strong>The LLM never does arithmetic. Rules do. The LLM makes the rules think.</strong>
+          </div>
+        </div>
+        <div class="proj-tags">
+          <span class="p-tag">Azure OpenAI GPT-5</span>
+          <span class="p-tag">Medallion Architecture</span>
+          <span class="p-tag">Multi-Agent</span>
+          <span class="p-tag">Python</span>
+          <span class="p-tag">Pandas</span>
+        </div>
+      </div>
+
+      <!-- PROJECT 3: App Management Agentic AI -->
+      <div class="proj-card reveal reveal-d2" onclick="window.open('https://github.com/SpoorthiRnth/Autonomous-AMS-Agentic-AI','_blank')" style="cursor:pointer">
+        <div class="proj-header">
+          <div class="proj-status live">Live on GitHub</div>
+          <div class="proj-title">App Management — Autonomous Incident Resolution</div>
+          <div class="proj-hook">Four AI agents triage, investigate, and resolve operational incidents autonomously. High-risk changes — config updates, rollbacks, status writes — pause for human approval before anything executes.</div>
+        </div>
+        <div class="proj-divider"></div>
+        <div class="proj-body">
+          <div class="pipeline">
+            <span class="pipe-step">Incident raised</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Orchestrator</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">SQL Agent</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Resolver</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Human approval</span>
+            <span class="pipe-arrow">→</span>
+            <span class="pipe-step">Ticket closed</span>
+          </div>
+          <button class="proj-insight-toggle" onclick="toggleInsight(this,event)">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1.5L7 5L3 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Key design decision
+          </button>
+          <div class="proj-insight">
+            The proposal tools are structurally incapable of writing to the database — the only path to a write is through <strong>execute_approved_proposal</strong>, which requires an <strong>approved_by</strong> value in the audit log. This cannot be bypassed by an agent. Human-in-the-loop is architecture, not a safety patch.
+          </div>
+          <div class="proj-detail">14 resolution playbooks loaded at runtime — one per incident type. Adding a new incident type means adding a playbook entry, no code changes. Every approved change produces an immutable audit log with old value, new value, operator name, and timestamp.</div>
+        </div>
+        <div class="proj-tags">
+          <span class="p-tag">AutoGen</span>
+          <span class="p-tag">GPT-4o</span>
+          <span class="p-tag">Multi-Agent</span>
+          <span class="p-tag">Human-in-the-Loop</span>
+          <span class="p-tag">Python</span>
+          <span class="p-tag">SQLite</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <div class="s-inner">
+    <div class="reveal">
+      <div class="s-label">Toolkit</div>
+      <h2 class="s-title">What I work <em>with</em></h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="skills-layout reveal">
+      <div class="s-tabs">
+        <button class="s-tab active" onclick="switchSkill(event,'sk-ai')">AI & ML</button>
+        <button class="s-tab" onclick="switchSkill(event,'sk-genai')">Generative AI</button>
+        <button class="s-tab" onclick="switchSkill(event,'sk-mlops')">MLOps</button>
+        <button class="s-tab" onclick="switchSkill(event,'sk-cloud')">Cloud</button>
+        <button class="s-tab" onclick="switchSkill(event,'sk-data')">Data & Backend</button>
+      </div>
+      <div>
+        <div class="s-panel active" id="sk-ai">
+          <div class="s-panel-title">AI & Machine Learning</div>
+          <div class="s-panel-desc">Deep learning, computer vision, NLP, and time series — applied to real operational datasets, not toy problems.</div>
+          <div class="chips">
+            <span class="chip hi">PyTorch</span><span class="chip hi">HuggingFace</span><span class="chip hi">Multimodal AI</span>
+            <span class="chip">TensorFlow</span><span class="chip">scikit-learn</span><span class="chip hi">NLP</span>
+            <span class="chip">Time Series Forecasting</span><span class="chip">LLM Fine-tuning</span>
+            <span class="chip hi">Prompt Engineering</span><span class="chip">LSTM</span>
+          </div>
+        </div>
+        <div class="s-panel" id="sk-genai">
+          <div class="s-panel-title">Generative AI</div>
+          <div class="s-panel-desc">End-to-end LLM system design — agents that reason, pipelines that retrieve, and backends that run offline when the data can't leave the building.</div>
+          <div class="chips">
+            <span class="chip hi">LangChain</span><span class="chip hi">LangGraph</span><span class="chip hi">RAG Pipelines</span>
+            <span class="chip hi">Multi-Agent Systems</span><span class="chip">n8n</span><span class="chip hi">Offline LLMs</span>
+            <span class="chip">LM Studio</span><span class="chip">Ollama</span><span class="chip">GPT-4 / GPT-5</span>
+            <span class="chip">Gemini</span><span class="chip">Llama</span><span class="chip">Mistral</span><span class="chip">DeepSeek</span>
+            <span class="chip hi">FAISS</span><span class="chip">ChromaDB</span><span class="chip">Weaviate</span>
+          </div>
+        </div>
+        <div class="s-panel" id="sk-mlops">
+          <div class="s-panel-title">MLOps & DevOps</div>
+          <div class="s-panel-desc">Production is where most ML projects die. I've built the CI/CD pipelines and monitoring infrastructure that keep them alive.</div>
+          <div class="chips">
+            <span class="chip hi">Docker</span><span class="chip hi">Kubernetes</span><span class="chip hi">GitLab CI</span>
+            <span class="chip hi">GitHub Actions</span><span class="chip hi">ELK Stack</span><span class="chip">Elasticsearch</span>
+            <span class="chip">Logstash</span><span class="chip">Kibana</span><span class="chip">Linux Server Mgmt</span>
+            <span class="chip">Git / GitHub / GitLab</span>
+          </div>
+        </div>
+        <div class="s-panel" id="sk-cloud">
+          <div class="s-panel-title">Cloud</div>
+          <div class="s-panel-desc">Azure as primary platform for ML workflow orchestration; AWS in active development. Comfortable mixing cloud and on-premise based on data sensitivity.</div>
+          <div class="chips">
+            <span class="chip hi">Azure ML</span><span class="chip">Azure OpenAI</span>
+            <span class="chip">AWS (developing)</span><span class="chip">Hybrid deployments</span>
+          </div>
+        </div>
+        <div class="s-panel" id="sk-data">
+          <div class="s-panel-title">Data & Backend</div>
+          <div class="s-panel-desc">Python across the stack — data pipelines, REST APIs, Streamlit apps. SQL for structured data; Django for backend services.</div>
+          <div class="chips">
+            <span class="chip hi">Python</span><span class="chip">pandas</span><span class="chip">NumPy</span>
+            <span class="chip hi">SQL</span><span class="chip">Django</span><span class="chip hi">Streamlit</span>
+            <span class="chip">REST APIs</span><span class="chip">Web Scraping</span>
+            <span class="chip">Databricks</span><span class="chip">Power BI</span><span class="chip">Tableau</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="s-inner">
+    <div class="reveal">
+      <div class="s-label">Career</div>
+      <h2 class="s-title">Where I've <em>worked</em></h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="exp-layout reveal">
+      <div class="exp-nav">
+        <button class="exp-nav-item active" onclick="switchExp(event,'ex1')">masem · AI Engineer</button>
+        <button class="exp-nav-item" onclick="switchExp(event,'ex2')">masem · Thesis</button>
+        <button class="exp-nav-item" onclick="switchExp(event,'ex3')">masem · Student</button>
+        <button class="exp-nav-item" onclick="switchExp(event,'ex4')">KPMG</button>
+      </div>
+      <div>
+        <div class="exp-panel active" id="ex1">
+          <div class="exp-role">Data Scientist / AI Engineer</div>
+          <div class="exp-company">masem Research Institute GmbH</div>
+          <div class="exp-period">Sep 2025 – Present · Remote · Germany</div>
+          <ul class="exp-list">
+            <li>Working predominantly on projects for R+V Versicherung — applying solutions for operational analytics and decision-making at a major German insurer.</li>
+            <li>Collaborate with product and engineering teams to translate business requirements into AI workflows and agent systems.</li>
+            <li>Design, develop, and debug AI workflows using prompt engineering, LLM chaining, and RAG pipelines.</li>
+            <li>Design and maintain CI/CD pipelines for model deployment using GitLab CI and Docker — automated testing, versioning, and reproducible rollout of production AI models.</li>
+            <li>Monitor model performance and detect data/concept drift in production using ELK Stack (Elasticsearch, Logstash, Kibana) — early identification of model degradation across live data pipelines.</li>
+            <li>Develop and manage containerised ML deployments on Linux servers, establishing scalable and reproducible model serving infrastructure aligned with MLOps best practices.</li>
+            <li>Prepare training concepts, documentation, and rollout strategies for departmental adoption of AI tools.</li>
+          </ul>
+        </div>
+        <div class="exp-panel" id="ex2">
+          <div class="exp-role">M.Sc. Thesis Researcher</div>
+          <div class="exp-company">masem Research Institute GmbH</div>
+          <div class="exp-period">Mar 2025 – Aug 2025 · Remote · Germany</div>
+          <ul class="exp-list">
+            <li>Designed and implemented a multi-agent AI framework with a supervisor-based routing architecture, offline LLM deployment, and a structured benchmarking methodology evaluating 3 open-source LLMs on task completion quality and consistency.</li>
+            <li>Managed the full research lifecycle independently, problem definition, system design, implementation, evaluation, and documentation.</li>
+            <li>Applied advanced prompt engineering to enable structured inter-agent communication and reliable task routing, deployed entirely offline (air-gapped) to meet strict data privacy and governance requirements.</li>
+          </ul>
+        </div>
+        <div class="exp-panel" id="ex3">
+          <div class="exp-role">Data Science / AI Working Student</div>
+          <div class="exp-company">masem Research Institute GmbH</div>
+          <div class="exp-period">Jan 2024 – Feb 2025 · Remote · Germany</div>
+          <ul class="exp-list">
+            <li>Built and deployed ML data pipelines processing heterogeneous data sources (PDFs, images, structured text) with rigorous data quality validation, schema checks, and pre-processing for RAG applications.</li>
+            <li>Developed and evaluated multimodal AI models for image and text classification, applying model performance tracking across input modalities.</li>
+            <li>Applied advanced prompt engineering for structured inter-agent communication and reliable offline task routing.</li>
+            <li>Leveraged Azure ML for automated ML workflow orchestration and cloud-based model automation, complementing on-premise Docker deployments depending on data sensitivity requirements.</li>
+            <li>Built AI agent systems using LangChain, LangGraph, and n8n, automating complex multi-step decision workflows with automatic task routing and state management.</li>
+            <li>Applied NLP and time series forecasting techniques to structured and unstructured manufacturing-adjacent datasets, extracting predictive signals for operational decision-making.</li>
+          </ul>
+        </div>
+        <div class="exp-panel" id="ex4">
+          <div class="exp-role">Data Analyst</div>
+          <div class="exp-company">KPMG Global Services Pvt Ltd</div>
+          <div class="exp-period">Sep 2021 – Sep 2023 · India</div>
+          <ul class="exp-list">
+            <li>Analysed large enterprise datasets to deliver data-driven insights and reports supporting client decision-making — developing strong data quality assessment and structured data handling practices.</li>
+            <li>Produced Functional Specification Documents (FSDs) and Technical Design Documents (TDDs), translating complex business requirements into precise technical deliverables.</li>
+            <li>Collaborated in cross-functional international teams, consistently aligning technical solutions with business objectives and adapting to evolving priorities.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="background:var(--surface)">
+  <div class="s-inner">
+    <div class="reveal">
+      <div class="s-label">Education</div>
+      <h2 class="s-title">Where I <em>learned</em></h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="exp-layout reveal">
+      <div class="exp-nav">
+        <button class="exp-nav-item active" onclick="switchExp(event,'ed1')">M.Sc.</button>
+        <button class="exp-nav-item" onclick="switchExp(event,'ed2')">B.E.</button>
+      </div>
+      <div>
+        <div class="exp-panel active" id="ed1">
+          <div class="exp-role">M.Sc. Data Science &amp; Project Management</div>
+          <div class="exp-company">HTW Berlin</div>
+          <div class="exp-period">Oct 2023 – Sep 2025 · Berlin, Germany</div>
+          <ul class="exp-list">
+            <li>Final grade: 1.5 · Thesis conducted at masem Research Institute GmbH.</li>
+            <li>Relevant coursework: Time Series Forecasting (semiconductor sensor data), Machine Learning, Data Engineering, Project &amp; IT Management.</li>
+          </ul>
+        </div>
+        <div class="exp-panel" id="ed2">
+          <div class="exp-role">B.E. Computer Science &amp; Engineering</div>
+          <div class="exp-company">Visvesvaraya Technological University</div>
+          <div class="exp-period">Aug 2017 – Aug 2021 · India</div>
+          <ul class="exp-list">
+            <li>Final grade: 1.3 (German equivalent).</li>
+            <li>Foundations: algorithms, data structures, software engineering, databases.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="s-inner">
+    <div class="contact-wrap reveal">
+      <div class="contact-left">
+        <h2>Let's build something <em>worth building</em></h2>
+        <p>I'm open to roles where AI engineering means solving real problems — not just deploying chatbots. If your team is doing serious work in agentic AI, MLOps, or production LLM systems, I'd like to talk.</p>
+        <p style="font-size:.85rem;color:var(--ink-40)">Germany · Open to remote &amp; hybrid</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:spoorthi.ranganatha@gmail.com" class="c-link">
+          <div class="c-icon">✉</div>
+          <div><div class="c-lbl">Email</div><div class="c-val">spoorthi.ranganatha@gmail.com</div></div>
+        </a>
+        <a href="https://linkedin.com/in/spoorthi-ranganath" target="_blank" class="c-link">
+          <div class="c-icon" style="font-size:.75rem;font-weight:700">in</div>
+          <div><div class="c-lbl">LinkedIn</div><div class="c-val">spoorthi-ranganath</div></div>
+        </a>
+        <a href="https://github.com/SpoorthiRnth" target="_blank" class="c-link">
+          <div class="c-icon" style="font-size:.8rem;font-weight:700">GH</div>
+          <div><div class="c-lbl">GitHub</div><div class="c-val">SpoorthiRnth</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="f-name">Spoorthi Ranganath</span>
+  <span class="f-note">AI Engineer · Dresden, Germany</span>
+</footer>
+
+<script>
+// Nav scroll shadow
+window.addEventListener('scroll',()=>document.getElementById('nav').style.boxShadow=window.scrollY>20?'0 2px 24px rgba(0,0,0,.08)':'');
+
+// Burger
+function toggleBurger(){document.getElementById('burger').classList.toggle('open');document.getElementById('mobMenu').classList.toggle('open')}
+function closeBurger(){document.getElementById('burger').classList.remove('open');document.getElementById('mobMenu').classList.remove('open')}
+
+// Skill tabs
+function switchSkill(e,id){
+  document.querySelectorAll('.s-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.s-panel').forEach(p=>p.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// Experience tabs
+function switchExp(e,id){
+  document.querySelectorAll('.exp-nav-item').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// Project insight toggle
+function toggleInsight(btn,e){
+  if(e){e.stopPropagation();}
+  const panel=btn.nextElementSibling;
+  const open=panel.classList.toggle('open');
+  btn.classList.toggle('open',open);
+}
+
+// Scroll reveal
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
